@@ -1,0 +1,248 @@
+Great — below is a **complete, end-to-end QA & maturity assessment** for the B3 project software, structured so it can be **directly reused in deliverables, reviews, or DMP/QA annexes**.
+
+---
+
+# 1. Software maturity & QA assessment template (B3-adapted)
+
+This template works for **R packages**, **services**, and **pipelines**, but has **extra depth for R packages**.
+
+## Maturity levels (aligned with TRL-like thinking)
+
+| Level  | Name               | Description                                   |
+| ------ | ------------------ | --------------------------------------------- |
+| **L0** | Prototype          | Exploratory code, scripts, notebooks          |
+| **L1** | Research software  | Reproducible, versioned, documented           |
+| **L2** | Reusable package   | Clear API, tests, CI, semantic versions       |
+| **L3** | Production-ready   | Stable, monitored, validated, maintained      |
+| **L4** | Community standard | External users, governance, long-term support |
+
+---
+
+## QA dimensions
+
+Each repository is assessed along these **8 dimensions**:
+
+1. **Packaging & structure**
+2. **Documentation**
+3. **Testing**
+4. **Continuous integration**
+5. **Reproducibility**
+6. **Licensing & citation**
+7. **Maintenance & governance**
+8. **Domain validation**
+
+---
+
+# 2. Mapping: B3 R packages → maturity levels
+
+## 2.1 R packages (core focus)
+
+### **dissmapr**
+
+| QA Dimension      | Status                         |
+| ----------------- | ------------------------------ |
+| Packaging         | ✅ Proper R package             |
+| Documentation     | ⚠️ README + basic examples     |
+| Testing           | ⚠️ Partial / limited           |
+| CI                | ❌ Not systematic               |
+| Reproducibility   | ⚠️ Versioned, but no lockfiles |
+| Licensing         | ✅ OSS                          |
+| Governance        | ❌ Single-team maintenance      |
+| Domain validation | ✅ Scientific methods           |
+
+**Maturity level:** **L2 (Reusable research package)**
+**Gap to L3:** CI, test coverage, lifecycle policy
+
+---
+
+### **invasimapr**
+
+| QA Dimension      | Status                               |
+| ----------------- | ------------------------------------ |
+| Packaging         | ✅ Clean R package                    |
+| Documentation     | ⚠️ User-focused but limited API docs |
+| Testing           | ⚠️ Some tests                        |
+| CI                | ❌ Not consistent                     |
+| Reproducibility   | ⚠️ Weak dependency pinning           |
+| Licensing         | ✅ OSS                                |
+| Governance        | ❌ No contributor policy              |
+| Domain validation | ✅ Strong                             |
+
+**Maturity level:** **L2**
+**Gap to L3:** Automation, robustness guarantees
+
+---
+
+### **pdindicatoR**
+
+| QA Dimension      | Status                      |
+| ----------------- | --------------------------- |
+| Packaging         | ✅ Proper R package          |
+| Documentation     | ⚠️ Method-heavy, user-light |
+| Testing           | ⚠️ Indicator-level tests    |
+| CI                | ❌ Missing                   |
+| Reproducibility   | ⚠️ Versioned                |
+| Licensing         | ✅ OSS                       |
+| Governance        | ❌ Project-bound             |
+| Domain validation | ✅ Excellent                 |
+
+**Maturity level:** **L2**
+**Gap to L3:** CI, API stability, release discipline
+
+---
+
+### **rgbif** (external benchmark)
+
+| QA Dimension      | Status          |
+| ----------------- | --------------- |
+| Packaging         | ✅ CRAN          |
+| Documentation     | ✅ Extensive     |
+| Testing           | ✅ High coverage |
+| CI                | ✅               |
+| Reproducibility   | ✅               |
+| Licensing         | ✅               |
+| Governance        | ✅ rOpenSci      |
+| Domain validation | ✅               |
+
+**Maturity level:** **L4 (Community standard)**
+→ **Benchmark for B3**
+
+---
+
+## 2.2 R-containing but non-package repos
+
+### **trias-project/indicators**
+
+* Script-oriented
+* No stable API
+* Mixed responsibilities
+
+**Maturity level:** **L1**
+**Recommendation:** Convert into 1–2 proper R packages or archive
+
+---
+
+# 3. Comparison: R packages vs non-R B3 components
+
+## 3.1 Summary maturity matrix
+
+| Category                 | Typical maturity |
+| ------------------------ | ---------------- |
+| **R packages**           | L2               |
+| **Data scripts**         | L1               |
+| **Services / backends**  | L2–L3            |
+| **GUIs**                 | L2               |
+| **Infrastructure**       | L3               |
+| **External deps (GBIF)** | L4               |
+
+---
+
+## 3.2 Strengths by category
+
+### R packages
+
+✅ Scientific rigor
+✅ Reproducibility potential
+❌ Under-automated QA
+
+### Services & pipelines
+
+✅ CI/CD more common
+✅ Operational focus
+❌ Harder to validate scientifically
+
+### Infrastructure
+
+✅ Strong DevOps discipline
+❌ Domain QA implicit, not explicit
+
+---
+
+## 4. B3-specific QA checklist for **R packages**
+
+This is **actionable** and **auditable**.
+
+---
+
+## 4.1 Mandatory (L2 → L3)
+
+### Structure
+
+* [ ] `DESCRIPTION` with ORCID authors
+* [ ] `NAMESPACE` autogenerated
+* [ ] Semantic versioning
+* [ ] Clean `R/`, `man/`, `tests/`
+
+### Documentation
+
+* [ ] README with installation + example
+* [ ] `pkgdown` site or vignette
+* [ ] Methodological references
+
+### Testing
+
+* [ ] `testthat` suite
+* [ ] ≥70% function coverage
+* [ ] Edge cases tested
+
+### Automation
+
+* [ ] GitHub Actions (R CMD check)
+* [ ] Test on ≥2 OS
+* [ ] Fail-fast CI
+
+---
+
+## 4.2 Recommended (L3)
+
+### Reproducibility
+
+* [ ] `renv` or dependency snapshot
+* [ ] Fixed example datasets
+* [ ] Deterministic outputs
+
+### Governance
+
+* [ ] CONTRIBUTING.md
+* [ ] Issue templates
+* [ ] Code of conduct
+
+### Validation
+
+* [ ] Unit tests reflect indicators’ math
+* [ ] Known-results tests
+* [ ] Peer-reviewed reference alignment
+
+---
+
+## 4.3 Optional (L4 ambition)
+
+* [ ] CRAN / rOpenSci submission
+* [ ] External adopters
+* [ ] Release roadmap
+* [ ] Deprecation policy
+
+---
+
+# 5. Concrete recommendations for B3
+
+## Short term (3–6 months)
+
+* Add **CI + tests** to all R packages
+* Harmonise **documentation structure**
+* Introduce **QA badge dashboard**
+
+## Medium term (6–12 months)
+
+* Merge or refactor script repos
+* Convert mature indicators into R packages
+* Introduce **cross-package QA policy**
+
+## Long term
+
+* Position 1–2 packages for **CRAN / rOpenSci**
+* Establish **post-project maintenance ownership**
+* Use `rgbif` as institutional benchmark
+
+---
+
